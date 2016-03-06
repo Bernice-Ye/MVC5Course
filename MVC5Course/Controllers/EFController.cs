@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace MVC5Course.Controllers
         FabricsEntities db = new FabricsEntities();
 
         // GET: EF
-        public ActionResult Index(bool? IsActive,string keyWord)
+        public ActionResult Index(bool? IsActive, string keyWord)
         {
             db.Product.Add(new Product()
             {
@@ -25,13 +26,14 @@ namespace MVC5Course.Controllers
 
             var data = db.Product.ToList().OrderByDescending(x => x.ProductId).AsQueryable();
 
-            if (IsActive.HasValue) {
+            if (IsActive.HasValue)
+            {
                 data = data.Where(x => x.Active.HasValue ? x.Active == IsActive : false);
             }
 
             if (!String.IsNullOrEmpty(keyWord))
             {
-                data = data.Where(x => x.ProductName.Contains(keyWord));                 
+                data = data.Where(x => x.ProductName.Contains(keyWord));
             }
 
             foreach (var item in data)
@@ -65,13 +67,13 @@ namespace MVC5Course.Controllers
             }
         }
 
-        
+
         public ActionResult Detail(int id)
         {
             var data = db.Product.FirstOrDefault(x => x.ProductId == id);
             return View(data);
         }
-        
+
         public ActionResult Delete(int id)
         {
             var product = db.Product.Find(id);
@@ -84,7 +86,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult QueryPlan()
         {
-            var data = db.Product.Include("OrderLine").OrderBy(p => p.ProductId).AsQueryable();
+            var data = db.Product.Include(o => o.OrderLine).OrderBy(p => p.ProductId).AsQueryable();
             return View(data);
         }
     }
