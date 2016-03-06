@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,11 +17,28 @@ namespace MVC5Course.Controllers
             db.Product.Add(new Product()
             {
                 ProductName = "BMW",
-                Price = 5,
+                Price = 1,
                 Stock = 1,
                 Active = true,
             });
-            db.SaveChanges();
+           
+            try
+            {
+                 db.SaveChanges();
+            }
+
+            catch (DbEntityValidationException ex)
+            {
+                var allErrors = new List<string>();
+                foreach (DbEntityValidationResult re in ex.EntityValidationErrors)
+                {
+                    foreach (DbValidationError err in re.ValidationErrors)
+                    {
+                        throw new Exception(err.ErrorMessage);
+                    }
+
+                }
+            }
 
             var data = db.Product.ToList();
             return View(data);
