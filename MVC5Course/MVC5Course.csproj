@@ -226,6 +226,9 @@
     <Compile Include="Models\usp_Fabrics_Result.cs">
       <DependentUpon>Fabrics.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vwClientOrder.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -313,6 +316,7 @@
     <Content Include="Views\EF\Index.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\EF\Detail.cshtml" />
+    <Content Include="Views\EF\QueryPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Default\" />

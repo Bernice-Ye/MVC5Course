@@ -81,5 +81,11 @@ namespace MVC5Course.Controllers
             SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult QueryPlan()
+        {
+            var data = db.Product.Include("OrderLine").OrderBy(p => p.ProductId).AsQueryable();
+            return View(data);
+        }
     }
 }
