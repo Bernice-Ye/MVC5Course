@@ -84,9 +84,15 @@ namespace MVC5Course.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult QueryPlan()
+        public ActionResult QueryPlan(int num = 10)
         {
-            var data = db.Product.Include(o => o.OrderLine).OrderBy(p => p.ProductId).AsQueryable();
+            //var data = db.Product.Include(o => o.OrderLine).OrderBy(p => p.ProductId).AsQueryable();
+            var data = db.Database.SqlQuery<Product>(@"
+                Select *
+                From dbo.Product P
+                    where P.ProductId < @P0
+                    ", num);
+
             return View(data);
         }
     }
