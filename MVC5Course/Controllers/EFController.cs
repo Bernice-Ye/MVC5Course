@@ -22,10 +22,23 @@ namespace MVC5Course.Controllers
                 Stock = 1,
                 Active = true,
             });
-           
+
+
+            var data = db.Product.ToList().OrderByDescending(x => x.ProductId);//.Take(8);
+            foreach (var item in data)
+            {
+                item.Price = item.Price + 1;
+            }
+            SaveChanges();
+
+            return View(data);
+        }
+
+        private void SaveChanges()
+        {
             try
             {
-                 db.SaveChanges();
+                db.SaveChanges();
             }
 
             catch (DbEntityValidationException ex)
@@ -40,14 +53,6 @@ namespace MVC5Course.Controllers
 
                 }
             }
-
-            var data = db.Product.ToList().OrderByDescending(x => x.ProductId).Take(8);
-            foreach (var item in data)
-            {
-                item.Price = item.Price + 1;
-            }
-            db.SaveChanges();
-            return View(data);
         }
 
         
@@ -59,8 +64,11 @@ namespace MVC5Course.Controllers
         
         public ActionResult Delete(int id)
         {
-            db.Product.Remove(db.Product.Find(id));
-            db.SaveChanges();
+            var product = db.Product.Find(id);
+
+            db.OrderLine.RemoveRange(product.OrderLine);
+            db.Product.Remove(product);
+            SaveChanges();
             return RedirectToAction("Index");
         }
     }
