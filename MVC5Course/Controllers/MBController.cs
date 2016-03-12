@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
@@ -13,20 +14,11 @@ namespace MVC5Course.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Index(string Name, DateTime Birthday)
-        //{
-        //    return Content(Name + " " + Birthday);
-        //}
-        //[HttpPost]
-        //public ActionResult Index(FormCollection Form)
-        //{
-        //    return Content(Form["Name"] + " " + Form["Birthday"]);
-        //}
         [HttpPost]
-        public ActionResult Index(string Name, DateTime Birthday)
+        public ActionResult Index(MemberViewModel data)
         {
-            return Content(Request.Form["Name"] + " " + Request.Form["Birthday"]);
+            return Content(data.Name + " " + data.Birthday);
         }
+
     }
 }

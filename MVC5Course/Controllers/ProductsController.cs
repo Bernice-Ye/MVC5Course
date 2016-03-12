@@ -17,7 +17,23 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(repo.All());
+            return View(repo.All().Take(5));
+        }
+        [HttpPost]
+        public ActionResult Index(IList<ProductList> products)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var item in products)
+                {
+                    var product = repo.Find(item.ProductId);
+                    product.Stock = item.Stock;
+                    product.Price = item.Price;
+                }
+                repo.UnitOfWork.Commit();
+                return RedirectToAction("Index");
+            }
+            return View(repo.All().Take(5));
         }
 
         // GET: Products/Details/5
