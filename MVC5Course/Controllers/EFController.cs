@@ -9,10 +9,9 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class EFController : Controller
+    public class EFController : BaseController
     {
         //FabricsEntities db = new FabricsEntities();
-        ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: EF
         public ActionResult Index()

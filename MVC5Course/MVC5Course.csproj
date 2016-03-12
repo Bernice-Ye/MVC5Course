@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -181,6 +182,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ARController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EFController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -295,6 +300,7 @@
     <Content Include="App_Data\Elmah.Errors\ElmahErrors.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\lamborghini.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -386,6 +392,8 @@
     <Content Include="Views\EF\QueryPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\AR\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
