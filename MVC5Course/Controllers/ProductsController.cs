@@ -98,7 +98,7 @@ namespace MVC5Course.Controllers
         {
             //[Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product
             Product product = repo.Find(id);
-            if (TryUpdateModel<Product>(product, new string[] { "ProductId","ProductName","Price","Active","Stock" }))
+            if (TryUpdateModel<IProduct>(product))
             {
                 //var db = (FabricsEntities)repo.UnitOfWork.Context;
                 //db.Entry(product).State = EntityState.Modified;

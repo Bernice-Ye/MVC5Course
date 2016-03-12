@@ -232,6 +232,7 @@
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\IRepository.EF6.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
