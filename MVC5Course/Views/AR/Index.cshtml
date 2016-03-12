@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<button id="btnJson">取得Json資料</button>
+@section Scripts{
+    <script>
+        $('#btnJson').bind('click', function () {
+            $.getJSON('/AR/JsonTest', '', function (data) {
+                console.log(data);
+            })
+        })
+    </script>
+}

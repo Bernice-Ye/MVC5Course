@@ -13,7 +13,6 @@ namespace MVC5Course.Controllers
     public class ProductsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
-        ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
         public ActionResult Index()
@@ -86,6 +85,7 @@ namespace MVC5Course.Controllers
                 var db = (FabricsEntities)repo.UnitOfWork.Context;
                 db.Entry(product).State = EntityState.Modified;
                 repo.UnitOfWork.Commit();
+                TempData["OK"] = "商品新增成功";
                 return RedirectToAction("Index");
             }
             return View(product);
