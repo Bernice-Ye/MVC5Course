@@ -9,3 +9,6 @@
 @*@section breadcrumb {
     <li><a href="#">@ViewBag.Title</a></li>
 }*@
+
+@Html.ActionLink(" ","Index",null,new{@class= "btn btn-primary",data_name = "123"})
+<a href="@Url.Action("Index")" class="btn btn-primary" data-name="123"></a>
