@@ -29,5 +29,23 @@ namespace MVC5Course.Controllers
 
             return View();
         }
+        public ActionResult ErrorTest(string e)
+        {
+            if (e == "1")
+            {
+                throw new Exception("Error 1");
+            }
+            else if(e == "2")
+            {
+                throw new Exception("Error 2");
+            }
+            return Content("No error");
+        }
+        public ActionResult RazorTest()
+        {
+            int[] data  = new int[] {1,2,3,4,5};
+
+            return PartialView(data);
+        }
     }
 }

@@ -10,13 +10,15 @@ namespace MVC5Course.Controllers
     public class ARController : BaseController
     {
         // GET: AR
+        [ControllerViewBagShare]
         public ActionResult Index()
         {
             return View();
         }
+        [ControllerViewBagShare]
         public ActionResult Index2()
         {
-            return View("Index");
+            return View();
         }
         public ActionResult Content()
         {
