@@ -15,9 +15,15 @@ namespace MVC5Course.Controllers
         //private FabricsEntities db = new FabricsEntities();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? Id,string Type)
         {
-            return View(repo.All().Take(5));
+            var data = repo.All().Take(5);
+            if (Id.HasValue) 
+            {
+                ViewBag.SelectId = Id.Value;
+                ViewBag.type = Type;
+            }
+            return View(data);
         }
         [HttpPost]
         public ActionResult Index(IList<ProductList> products)

@@ -39,14 +39,19 @@
         }
         @for (var i = 0; i < products.Count(); i++)
         {
+            if (ViewBag.SelectId != null && ViewBag.SelectId == products[i].ProductId)
+            {
+                ViewBag.ID = products[i];
+            }
             <tr>
+
                 @Html.HiddenFor(modelItem => products[i].ProductId)
                 <td>
                     @Html.DisplayFor(modelItem => products[i].ProductName)
                 </td>
                 <td>
                     @Html.TextBoxFor(modelItem => products[i].Price)
-                    <br/>
+                    <br />
                     @Html.ValidationMessageFor(modelItem => products[i].Price)
                 </td>
                 <td>
@@ -59,13 +64,22 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = products[i].ProductId }) |
-                    @Html.ActionLink("Details", "Details", new { id = products[i].ProductId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = products[i].ProductId })
+                    @Html.ActionLink("Details", "Index", new { Type = "Details", id = products[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = products[i].ProductId }) |
+                    @Html.ActionLink("OrderLines", "Index", new {Type ="OrderLines" ,Id = products[i].ProductId })
+
                 </td>
             </tr>
         }
-
-
     </table>
     <button class="btn btn-primary">批次更新</button>
 }
+@if(ViewBag.SelectId != null && ViewBag.type == "Details")
+{
+@Html.Partial("Details", ViewData["ID"])
+}
+else if (ViewBag.SelectId != null && ViewBag.type == "OrderLines")
+{
+    @Html.Action("Index", "OrderLines", new { ProductId = ViewBag.SelectId })
+}
+
